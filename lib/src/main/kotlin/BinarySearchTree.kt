@@ -15,12 +15,6 @@ abstract class AbstractBinarySearchTree<K : Comparable<K>, V, R : BinaryTreeNode
     fun getSize(): Int {
         return 0 // TODO: implement
     }
-    fun getMin(): Int {
-        return 0 // TODO: implement
-    }
-    fun getMax(): Int {
-        return 0 // TODO: implement
-    }
 }
 
 /**
