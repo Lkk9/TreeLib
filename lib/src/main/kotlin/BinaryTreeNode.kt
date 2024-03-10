@@ -1,3 +1,4 @@
+
 /**
  * simplest BST node
  */
@@ -35,7 +36,18 @@ class RedBlackTreeNode<K : Comparable<K>, V>(
     key: K,
     value: V,
     parent: BinaryTreeNode<K, V>?,
-    var color: NodeColor
 ) : BinaryTreeNodeWithParent<K, V>(key, value, parent) {
-    enum class NodeColor{ RED, BLACK }
+    private var color = 0
+    fun setRed() {
+        color = 0
+    }
+
+    fun setBlack() {
+        color = 1
+    }
+
+    fun getColor(): Int {
+        return color
+    }
+
 }

@@ -2,17 +2,17 @@
  * interface for any tree traversal
  */
 interface BinaryTreeTraverse<K : Comparable<K>, V> {
-    fun traverse(node: BinaryTreeNode<K, V>?): List<Any> // TODO: maybe allow without null
+    fun traverse(node: BinaryTreeNode<K, V>): List<Any>
 }
 
 /**
  * preorder
  */
 class BinaryTreeTraversePreOrder<K : Comparable<K>, V>(
-    private val extractFunction: (BinaryTreeNode<K, V>?) -> Any
+    val extractFunction: (BinaryTreeNode<K, V>) -> Any
 ) : BinaryTreeTraverse<K, V> {
-    override fun traverse(node: BinaryTreeNode<K, V>?): List<Any> {
-        return if (node == null) listOf() else listOf(extractFunction(node)) // TODO: implement traversal
+    override fun traverse(node: BinaryTreeNode<K, V>): List<Any> {
+        return listOf(extractFunction(node)) // TODO: implement traversal
     }
 }
 
@@ -20,10 +20,10 @@ class BinaryTreeTraversePreOrder<K : Comparable<K>, V>(
  * inorder
  */
 class BinaryTreeTraverseInOrder<K : Comparable<K>, V>(
-    private val extractFunction: (BinaryTreeNode<K, V>?) -> Any
+    val extractFunction: (BinaryTreeNode<K, V>) -> Any
 ) : BinaryTreeTraverse<K, V> {
-    override fun traverse(node: BinaryTreeNode<K, V>?): List<Any> {
-        return if (node == null) listOf() else listOf(extractFunction(node)) // TODO: implement traversal
+    override fun traverse(node: BinaryTreeNode<K, V>): List<Any> {
+        return listOf(extractFunction(node)) // TODO: implement traversal
     }
 }
 
@@ -31,23 +31,21 @@ class BinaryTreeTraverseInOrder<K : Comparable<K>, V>(
  * postorder
  */
 class BinaryTreeTraversePostOrder<K : Comparable<K>, V>(
-    private val extractFunction: (BinaryTreeNode<K, V>?) -> Any
+    val extractFunction: (BinaryTreeNode<K, V>) -> Any
 ) : BinaryTreeTraverse<K, V> {
-    override fun traverse(node: BinaryTreeNode<K, V>?): List<Any> {
-        return if (node == null) listOf() else listOf(extractFunction(node)) // TODO: implement traversal
+    override fun traverse(node: BinaryTreeNode<K, V>): List<Any> {
+        return listOf(extractFunction(node)) // TODO: implement traversal
     }
 }
 
 /**
- * bfs-like
+ * width
  */
-// TODO: change name
-class BinaryTreeTraverseBFS<K : Comparable<K>, V>(
-    private val extractFunction: (BinaryTreeNode<K, V>?) -> Any
+class BinaryTreeTraverseWidth<K : Comparable<K>, V>(
+    val extractFunction: (BinaryTreeNode<K, V>) -> Any
 ) : BinaryTreeTraverse<K, V> {
-    override fun traverse(node: BinaryTreeNode<K, V>?): List<Any> {
-        return if (node == null) listOf() else listOf(extractFunction(node)) // TODO: implement traversal
+    override fun traverse(node: BinaryTreeNode<K, V>): List<Any> {
+        return listOf(extractFunction(node)) // TODO: implement traversal
     }
 }
-
 // TODO: add other ways to traverse tree

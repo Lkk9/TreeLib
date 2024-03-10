@@ -1,55 +1,62 @@
 /**
  * common abstract class for all BSTs
  */
-abstract class AbstractBinarySearchTree<K : Comparable<K>, V> {
-    var root: BinaryTreeNode<K, V>? = null
-    var totalNodes: Int = 0
+abstract class AbstractBinarySearchTree<K : Comparable<K>, V, R : BinaryTreeNode<K, V>> {
+    var root: R? = null
     abstract fun search(key: K): V?
-    abstract fun insert(key: K, value: V)
+    abstract fun insert(key: K, value: V): Boolean
     abstract fun remove(key: K): Boolean
     fun traverse(treeTraverse: BinaryTreeTraverse<K, V>): List<Any> {
-        return treeTraverse.traverse(root)
+        return if (root == null) listOf() else treeTraverse.traverse(root!!)
     }
     fun isEmpty(): Boolean {
-        return totalNodes == 0 // TODO: implement maybe
+        return root == null
     }
     fun getSize(): Int {
-        return totalNodes // TODO: implement maybe
+        return 0 // TODO: implement
+    }
+    fun getMin(): Int {
+        return 0 // TODO: implement
+    }
+    fun getMax(): Int {
+        return 0 // TODO: implement
     }
 }
 
 /**
  * Standard BST class implemented here
  */
-open class UnbalancedBinarySearchTree<K : Comparable<K>, V> : AbstractBinarySearchTree<K, V>() {
+class UnbalancedBinarySearchTree<K : Comparable<K>, V> : AbstractBinarySearchTree<K, V, BinaryTreeNode<K, V>>() {
     override fun search(key: K): V? {
         return root?.value // TODO: implement
     }
-    override fun insert(key: K, value: V) {
-         // TODO: implement
+    override fun insert(key: K, value: V): Boolean {
+         return false // TODO: implement
     }
     override fun remove(key: K): Boolean {
         return false // TODO: implement
     }
 }
 
-class AVLSearchTree<K : Comparable<K>, V> : UnbalancedBinarySearchTree<K, V>() {
-    override fun insert(key: K, value: V) {
-        super.insert(key, value)
-        // TODO: implement pos-insertion logic
+class AVLSearchTree<K : Comparable<K>, V> : AbstractBinarySearchTree<K, V, AVLTreeNode<K, V>>() {
+    override fun search(key: K): V? {
+        return root?.value // TODO: implement
     }
-
+    override fun insert(key: K, value: V): Boolean {
+        return false // TODO: implement
+    }
     override fun remove(key: K): Boolean {
         return false // TODO: implement
     }
 }
 
-class RedBlackSearchTree<K : Comparable<K>, V> : UnbalancedBinarySearchTree<K, V>() {
-    override fun insert(key: K, value: V) {
-        super.insert(key, value)
-        // TODO: implement pos-insertion logic
+class RedBlackSearchTree<K : Comparable<K>, V> : AbstractBinarySearchTree<K, V, RedBlackTreeNode<K, V>>() {
+    override fun search(key: K): V? {
+        return root?.value // TODO: implement
     }
-
+    override fun insert(key: K, value: V): Boolean {
+        return false // TODO: implement
+    }
     override fun remove(key: K): Boolean {
         return false // TODO: implement
     }
