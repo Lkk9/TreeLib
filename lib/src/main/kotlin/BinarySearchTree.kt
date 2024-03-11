@@ -1,57 +1,112 @@
 /**
- * common abstract class for all BSTs
+ * class for all trees
  */
-abstract class AbstractBinarySearchTree<K : Comparable<K>, V, R : BinaryTreeNode<K, V>> {
-    var root: R? = null
+abstract class AbstractBST<K : Comparable<K>, V, R : BSTNode<K, V>> {
+    abstract var root: R?
     abstract fun search(key: K): V?
     abstract fun insert(key: K, value: V): Boolean
-    abstract fun remove(key: K): Boolean
-    fun traverse(treeTraverse: BinaryTreeTraverse<K, V>): List<Any> {
-        return if (root == null) listOf() else treeTraverse.traverse(root!!)
+    abstract fun remove(key: K): V?
+}
+
+/**
+ *  Unbalanced Tree
+ */
+abstract class UnbalancedBST<K : Comparable<K>, V, R : BSTNode<K, V>> : AbstractBST<K, V, R>() {
+    override var root: R? = null
+    override fun search(key: K): V? {
+        TODO("Not yet implemented")
     }
+
+    override fun insert(key: K, value: V): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun remove(key: K): V? {
+        TODO("Not yet implemented")
+    }
+
+    fun <T> traverse(traverseMethod: BinaryTreeTraversal<K, V, R>, extractFunction: (R) -> T): List<T> {
+        return if (root == null) listOf() else traverseMethod.traverse(root!!, extractFunction)
+    }
+
     fun isEmpty(): Boolean {
         return root == null
     }
+
     fun getSize(): Int {
-        return 0 // TODO: implement
+        return traverse(BinaryTreeTraversalInOrder()) { it.key }.size
     }
 }
 
 /**
- * Standard BST class implemented here
+ * Adds balancer to unbalanced tree
  */
-class UnbalancedBinarySearchTree<K : Comparable<K>, V> : AbstractBinarySearchTree<K, V, BinaryTreeNode<K, V>>() {
-    override fun search(key: K): V? {
-        return root?.value // TODO: implement
-    }
-    override fun insert(key: K, value: V): Boolean {
-         return false // TODO: implement
-    }
-    override fun remove(key: K): Boolean {
-        return false // TODO: implement
+abstract class BalancedBST<K : Comparable<K>, V, R : BSTNodeWithParent<K, V>> : UnbalancedBST<K, V, R>() {
+    abstract var balancer: AbstractBinaryTreeBalancer<K, V, R>
+
+    fun balance(balanceFunction: (R) -> Unit) {
+        if (root == null) return
+        balanceFunction(root!!)
     }
 }
 
-class AVLSearchTree<K : Comparable<K>, V> : AbstractBinarySearchTree<K, V, AVLTreeNode<K, V>>() {
+/**
+ * Lib
+ */
+class BSTRegularTree<K : Comparable<K>, V> : UnbalancedBST<K, V, BSTNode<K, V>>() {
     override fun search(key: K): V? {
-        return root?.value // TODO: implement
+        super.search(key)
+        TODO("Not yet implemented")
+    }
+
+    override fun insert(key: K, value: V): Boolean {
+        super.insert(key, value)
+        TODO("Not yet implemented")
+    }
+
+    override fun remove(key: K): V? {
+        super.remove(key)
+        TODO("Not yet implemented")
+    }
+
+}
+
+class BSTAVLTree<K : Comparable<K>, V> : BalancedBST<K, V, AVLTreeNode<K, V>>() {
+    override var balancer: AbstractBinaryTreeBalancer<K, V, AVLTreeNode<K, V>> = AVLTreeBalancer()
+
+    override fun search(key: K): V? {
+        return super.search(key)
+    }
+    override fun remove(key: K): V? {
+        super.remove(key)
+        super.balance(balancer::remover)
+        return null
     }
     override fun insert(key: K, value: V): Boolean {
-        return false // TODO: implement
-    }
-    override fun remove(key: K): Boolean {
-        return false // TODO: implement
+        super.insert(key, value)
+        super.balance(balancer::inserter)
+        return false
     }
 }
 
-class RedBlackSearchTree<K : Comparable<K>, V> : AbstractBinarySearchTree<K, V, RedBlackTreeNode<K, V>>() {
+class BSTRedBlackTree<K : Comparable<K>, V> : BalancedBST<K, V, RedBlackTreeNode<K, V>>() {
+    override var balancer: AbstractBinaryTreeBalancer<K, V, RedBlackTreeNode<K, V>> = RedBlackTreeBalancer()
+
     override fun search(key: K): V? {
-        return root?.value // TODO: implement
+        return super.search(key)
+    }
+    override fun remove(key: K): V? {
+        super.remove(key)
+        super.balance(balancer::remover)
+        return null
     }
     override fun insert(key: K, value: V): Boolean {
-        return false // TODO: implement
-    }
-    override fun remove(key: K): Boolean {
-        return false // TODO: implement
+        super.insert(key, value)
+        super.balance(balancer::inserter)
+        return false
     }
 }
+
+
+
+

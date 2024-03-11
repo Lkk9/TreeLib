@@ -18,5 +18,5 @@ else return null
 
 ### remove 
 removes by key
-if key in tree remove it and return true 
-else return false
+if key in tree remove it and return it 
+else return null
