@@ -1,9 +1,9 @@
-interface BinaryTreeBalancer<K : Comparable<K>, V, R : BSTNodeWithParent<K, V>> {
+interface BinaryTreeBalancer<K : Comparable<K>, V, R : AbstractBSTNodeWithParent<K, V, R>> {
     fun inserter(node: R)
     fun remover(node: R)
 }
 
-abstract class AbstractBinaryTreeBalancer<K : Comparable<K>, V, R : BSTNodeWithParent<K, V>> : BinaryTreeBalancer<K, V, R> {
+abstract class AbstractBinaryTreeBalancer<K : Comparable<K>, V, R : AbstractBSTNodeWithParent<K, V, R>> : BinaryTreeBalancer<K, V, R> {
     fun rotateLeft(node: R) {
         TODO("implement")
     }
@@ -13,25 +13,25 @@ abstract class AbstractBinaryTreeBalancer<K : Comparable<K>, V, R : BSTNodeWithP
     }
 }
 
-class AVLTreeBalancer<K : Comparable<K>, V, R : AVLTreeNode<K, V>> : AbstractBinaryTreeBalancer<K, V, R>() {
-    override fun inserter(node: R) {
+class AVLTreeBalancer<K : Comparable<K>, V> : AbstractBinaryTreeBalancer<K, V, AVLTreeNode<K, V>>() {
+    override fun inserter(node: AVLTreeNode<K, V>) {
         super.rotateRight(node) // e.g.
         super.rotateLeft(node) // e.g.
         TODO("Not yet implemented")
     }
 
-    override fun remover(node: R) {
+    override fun remover(node: AVLTreeNode<K, V>) {
         TODO("Not yet implemented")
     }
 
 }
 
-class RedBlackTreeBalancer<K : Comparable<K>, V, R : RedBlackTreeNode<K, V>> : AbstractBinaryTreeBalancer<K, V, R>() {
-    override fun inserter(node: R) {
+class RedBlackTreeBalancer<K : Comparable<K>, V> : AbstractBinaryTreeBalancer<K, V, RedBlackTreeNode<K, V>>() {
+    override fun inserter(node: RedBlackTreeNode<K, V>) {
         TODO("Not yet implemented")
     }
 
-    override fun remover(node: R) {
+    override fun remover(node: RedBlackTreeNode<K, V>) {
         TODO("Not yet implemented")
     }
 

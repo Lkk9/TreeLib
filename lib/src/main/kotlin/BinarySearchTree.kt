@@ -1,7 +1,7 @@
 /**
  * class for all trees
  */
-abstract class AbstractBST<K : Comparable<K>, V, R : BSTNode<K, V>> {
+abstract class AbstractBST<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>> {
     abstract var root: R?
     abstract fun search(key: K): V?
     abstract fun insert(key: K, value: V): Boolean
@@ -11,7 +11,7 @@ abstract class AbstractBST<K : Comparable<K>, V, R : BSTNode<K, V>> {
 /**
  *  Unbalanced Tree
  */
-abstract class UnbalancedBST<K : Comparable<K>, V, R : BSTNode<K, V>> : AbstractBST<K, V, R>() {
+abstract class UnbalancedBST<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>> : AbstractBST<K, V, R>() {
     override var root: R? = null
     override fun search(key: K): V? {
         TODO("Not yet implemented")
@@ -41,7 +41,7 @@ abstract class UnbalancedBST<K : Comparable<K>, V, R : BSTNode<K, V>> : Abstract
 /**
  * Adds balancer to unbalanced tree
  */
-abstract class BalancedBST<K : Comparable<K>, V, R : BSTNodeWithParent<K, V>> : UnbalancedBST<K, V, R>() {
+abstract class BalancedBST<K : Comparable<K>, V, R : AbstractBSTNodeWithParent<K, V, R>> : UnbalancedBST<K, V, R>() {
     abstract var balancer: AbstractBinaryTreeBalancer<K, V, R>
 
     fun balance(balanceFunction: (R) -> Unit) {

@@ -1,14 +1,14 @@
 /**
  * interface for any tree traversal
  */
-interface BinaryTreeTraversal<K : Comparable<K>, V, R : BSTNode<K, V>> {
+interface BinaryTreeTraversal<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>> {
     fun <T> traverse(node: R, extractionFunction: (R) -> T): List<T>
 }
 
 /**
  * in order
  */
-class BinaryTreeTraversalInOrder<K : Comparable<K>, V, R : BSTNode<K, V>> : BinaryTreeTraversal<K, V, R> {
+class BinaryTreeTraversalInOrder<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>> : BinaryTreeTraversal<K, V, R> {
     override fun <T> traverse(node: R, extractionFunction: (R) -> T): List<T> {
         TODO("implement")
         return listOf(extractionFunction(node)) // e.g.
@@ -18,7 +18,7 @@ class BinaryTreeTraversalInOrder<K : Comparable<K>, V, R : BSTNode<K, V>> : Bina
 /**
  * pre order
  */
-class BinaryTreeTraversalPreOrder<K : Comparable<K>, V, R : BSTNode<K, V>> : BinaryTreeTraversal<K, V, R> {
+class BinaryTreeTraversalPreOrder<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>> : BinaryTreeTraversal<K, V, R> {
     override fun <T> traverse(node: R, extractionFunction: (R) -> T): List<T> {
         TODO("implement")
     }
@@ -27,7 +27,7 @@ class BinaryTreeTraversalPreOrder<K : Comparable<K>, V, R : BSTNode<K, V>> : Bin
 /**
  * post order
  */
-class BinaryTreeTraversalPostOrder<K : Comparable<K>, V, R : BSTNode<K, V>> : BinaryTreeTraversal<K, V, R> {
+class BinaryTreeTraversalPostOrder<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>> : BinaryTreeTraversal<K, V, R> {
     override fun <T> traverse(node: R, extractionFunction: (R) -> T): List<T> {
         TODO("implement")
     }
@@ -36,7 +36,7 @@ class BinaryTreeTraversalPostOrder<K : Comparable<K>, V, R : BSTNode<K, V>> : Bi
 /**
  * level order
  */
-class BinaryTreeTraversalLevelOrder<K : Comparable<K>, V, R : BSTNode<K, V>> : BinaryTreeTraversal<K, V, R> {
+class BinaryTreeTraversalLevelOrder<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>> : BinaryTreeTraversal<K, V, R> {
     override fun <T> traverse(node: R, extractionFunction: (R) -> T): List<T> {
         TODO("implement")
     }
