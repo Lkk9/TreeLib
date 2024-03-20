@@ -11,7 +11,7 @@ abstract class AbstractBST<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>> {
 /**
  *  Unbalanced Tree
  */
-abstract class UnbalancedBST<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>> : AbstractBST<K, V, R>() {
+abstract class RegularAbstractBST<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>> : AbstractBST<K, V, R>() {
     override var root: R? = null
     override fun search(key: K): V? {
         TODO("Not yet implemented")
@@ -29,6 +29,9 @@ abstract class UnbalancedBST<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>>
         return if (root == null) listOf() else traverseMethod.traverse(root!!, extractFunction)
     }
 
+    /**
+     * if needed
+     */
     fun isEmpty(): Boolean {
         return root == null
     }
@@ -41,7 +44,7 @@ abstract class UnbalancedBST<K : Comparable<K>, V, R : AbstractBSTNode<K, V, R>>
 /**
  * Adds balancer to unbalanced tree
  */
-abstract class BalancedBST<K : Comparable<K>, V, R : AbstractBSTNodeWithParent<K, V, R>> : UnbalancedBST<K, V, R>() {
+abstract class RegularAbstractBSTWithBalancer<K : Comparable<K>, V, R : AbstractBSTNodeWithParent<K, V, R>> : RegularAbstractBST<K, V, R>() {
     abstract var balancer: AbstractBinaryTreeBalancer<K, V, R>
 
     fun balance(balanceFunction: (R) -> Unit) {
@@ -53,7 +56,7 @@ abstract class BalancedBST<K : Comparable<K>, V, R : AbstractBSTNodeWithParent<K
 /**
  * Lib
  */
-class BSTRegularTree<K : Comparable<K>, V> : UnbalancedBST<K, V, BSTNode<K, V>>() {
+class RegularTree<K : Comparable<K>, V> : RegularAbstractBST<K, V, BSTNode<K, V>>() {
     override fun search(key: K): V? {
         super.search(key)
         TODO("Not yet implemented")
@@ -71,7 +74,7 @@ class BSTRegularTree<K : Comparable<K>, V> : UnbalancedBST<K, V, BSTNode<K, V>>(
 
 }
 
-class BSTAVLTree<K : Comparable<K>, V> : BalancedBST<K, V, AVLTreeNode<K, V>>() {
+class AVLTree<K : Comparable<K>, V> : RegularAbstractBSTWithBalancer<K, V, AVLTreeNode<K, V>>() {
     override var balancer: AbstractBinaryTreeBalancer<K, V, AVLTreeNode<K, V>> = AVLTreeBalancer()
 
     override fun search(key: K): V? {
@@ -89,7 +92,7 @@ class BSTAVLTree<K : Comparable<K>, V> : BalancedBST<K, V, AVLTreeNode<K, V>>() 
     }
 }
 
-class BSTRedBlackTree<K : Comparable<K>, V> : BalancedBST<K, V, RedBlackTreeNode<K, V>>() {
+class RedBlackTree<K : Comparable<K>, V> : RegularAbstractBSTWithBalancer<K, V, RedBlackTreeNode<K, V>>() {
     override var balancer: AbstractBinaryTreeBalancer<K, V, RedBlackTreeNode<K, V>> = RedBlackTreeBalancer()
 
     override fun search(key: K): V? {
